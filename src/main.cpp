@@ -20,6 +20,7 @@ using std::clock_t;
 using std::cout;
 using std::cin;
 using std::endl;
+using std::fixed;
 using std::string;
 
 map<int, const Problem*> availableProblems();
@@ -37,13 +38,14 @@ int main() {
         if (find != end) {
             
             cout << "Problem " << input << ": " << endl;
-            double time = 0;
+            
+            clock_t t1 = clock();
             
             find->second->run();
             
-            clock_t t1 = clock();
-            time = time + (double)(t1) / CLOCKS_PER_SEC;
-            cout << "Time Taken = " << time << " seconds." <<endl;
+            clock_t t2 = clock();
+            double time = (double) (t2 - t1) / CLOCKS_PER_SEC;
+            cout << fixed << "Time Taken = " << time << " seconds." << endl;
         } else if (input != -1) {
             cout << endl << input << " is not a currently available problem." << endl;
             cout << "Try one of: " << endl;
