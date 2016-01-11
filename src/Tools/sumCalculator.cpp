@@ -1,8 +1,6 @@
 
 #include "sumCalculator.h"
-
-bool hasFactorIn(int number, vector<int> factors);
-
+#include "factoriser.h"
 
 /*
  * Calculates the sum of all integers less than @upTo that have at least one factor in @factors. 
@@ -10,7 +8,7 @@ bool hasFactorIn(int number, vector<int> factors);
 int SumCalculator::sumMulitplesOf(vector<int> factors, int upTo) {
     int sum = 0;
     for (int i = 0; i < upTo; i++) {
-        if (hasFactorIn(i, factors)) {
+        if (Factoriser::hasFactorIn(i, factors)) {
             sum += i;
         }
     }
@@ -20,11 +18,11 @@ int SumCalculator::sumMulitplesOf(vector<int> factors, int upTo) {
 int SumCalculator::sumFibonacciMultiplesOf(vector<int> factors, int upTo) {
     int sum = 0, fibA = 1, fibB = 2;
     
-    if (hasFactorIn(fibA, factors)) {
+    if (Factoriser::hasFactorIn(fibA, factors)) {
         sum += fibA;
     }
     
-    if (hasFactorIn(fibB, factors)) {
+    if (Factoriser::hasFactorIn(fibB, factors)) {
         sum += fibB;
     }
     
@@ -33,7 +31,7 @@ int SumCalculator::sumFibonacciMultiplesOf(vector<int> factors, int upTo) {
             
             int fib = fibA + fibB;
             
-            if (hasFactorIn(fib, factors)) {
+            if (Factoriser::hasFactorIn(fib, factors)) {
                 sum += fib;
             }
             
@@ -43,14 +41,4 @@ int SumCalculator::sumFibonacciMultiplesOf(vector<int> factors, int upTo) {
     }
     
     return sum;
-}
-
-bool hasFactorIn(int number, vector<int> factors) {
-    for (vector<int>::iterator it = factors.begin(); it != factors.end(); ++it) {
-        if (number % *it == 0) {
-            return true;
-        }
-    }
-    
-    return false;
 }

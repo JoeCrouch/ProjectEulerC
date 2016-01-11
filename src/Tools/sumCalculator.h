@@ -13,11 +13,11 @@ public:
         static SumCalculator instance;
         return instance;
     };
-    
+
     int sumMulitplesOf(vector<int> factors, int upTo);
     int sumFibonacciMultiplesOf(vector<int> factors, int upTo);
     
-private :
+    private :
     SumCalculator() {};
 };
 
