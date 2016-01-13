@@ -1,11 +1,14 @@
 
-#include "sumCalculator.h"
+#include "calculator.h"
 #include "factoriser.h"
+#include "transformer.h"
+
+bool isPalindromic(vector<int> vector);
 
 /*
  * Calculates the sum of all integers less than @upTo that have at least one factor in @factors. 
  */
-int SumCalculator::sumMulitplesOf(vector<int> factors, int upTo) {
+int Calculator::sumMulitplesOf(vector<int> factors, int upTo) {
     int sum = 0;
     for (int i = 0; i < upTo; i++) {
         if (Factoriser::hasFactorIn(i, factors)) {
@@ -15,7 +18,7 @@ int SumCalculator::sumMulitplesOf(vector<int> factors, int upTo) {
     return sum;
 };
 
-int SumCalculator::sumFibonacciMultiplesOf(vector<int> factors, int upTo) {
+int Calculator::sumFibonacciMultiplesOf(vector<int> factors, int upTo) {
     int sum = 0, fibA = 1, fibB = 2;
     
     if (Factoriser::hasFactorIn(fibA, factors)) {
@@ -41,4 +44,19 @@ int SumCalculator::sumFibonacciMultiplesOf(vector<int> factors, int upTo) {
     }
     
     return sum;
+}
+
+bool Calculator::isPalindromic(int n) {
+    vector<int> nAsVector = Transformer::asVector(n);
+    
+    return ::isPalindromic(nAsVector);
+}
+
+bool isPalindromic(vector<int> vector) {
+    for (int i = 0; i < vector.size() / 2; ++i) {
+        if (vector[i] != vector[vector.size() - i - 1]) {
+            return false;
+        }
+    }
+    return true;
 }
