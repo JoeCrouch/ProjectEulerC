@@ -61,6 +61,29 @@ bool isPalindromic(vector<int> vector) {
     return true;
 }
 
+bool Calculator::isPrime(int n) {
+    if (n <= 1) {
+        return false;
+    } else if (n == 2) {
+        return true;
+    } else if (n % 2 == 0) {
+        return false;
+    } else if (n < 9) {
+        return true;
+    } else if (n % 3 == 0) {
+        return false;
+    } else if (n % 5 == 0) {
+        return false;
+    } else {
+        for (int i = 7; i * i <= n; ++i) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
 long Calculator::sumNumbersFromTo(int from, int to) {
     long sum = 0;
     
