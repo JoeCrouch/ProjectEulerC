@@ -60,3 +60,26 @@ bool isPalindromic(vector<int> vector) {
     }
     return true;
 }
+
+long Calculator::sumNumbersFromTo(int from, int to) {
+    long sum = 0;
+    
+    for (int i = from; i <= to; ++i) {
+        sum += i;
+    }
+    
+    return sum;
+    
+}
+
+long Calculator::sumSquaresFromTo(int from, int to) {
+    long sum = 0;
+    
+    for (int i = from; i <= to; ++i) {
+        sum += (i * i);
+    }
+    
+    return sum;
+    
+}
+

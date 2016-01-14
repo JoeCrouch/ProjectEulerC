@@ -17,6 +17,8 @@ public:
     int sumMulitplesOf(vector<int> factors, int upTo);
     int sumFibonacciMultiplesOf(vector<int> factors, int upTo);
     bool isPalindromic(int n);
+    long sumNumbersFromTo(int from, int to);
+    long sumSquaresFromTo(int from, int to);
     
     private :
     Calculator() {};
