@@ -12,7 +12,7 @@ const Problem10 Problem10::INSTANCE = Problem10();
 
 void Problem10::run() const {
     long int m = 2;
-    __int64_t sum = 0;
+    long sum = 0;
     //TODO: could be a for loop?
     while (m < 2000000)
     {
@@ -21,7 +21,7 @@ void Problem10::run() const {
         }
         m++;
     }
-    
+
     cout << "The sum of all the primes below two million is:" << endl;
     cout << sum << endl << endl;
 }
