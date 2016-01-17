@@ -1,22 +1,25 @@
 //http://projecteuler.net/problem=11
 
 #include "problem11.h"
+#include "printer.h"
+#include <algorithm>
+#include <vector>
 #include <iostream>
 #include <iomanip>
 
 using std::cout;
 using std::endl;
 using std::setw;
+using std::vector;
+using std::max;
 
 const Problem11 Problem11::INSTANCE = Problem11();
 
-//TODO: more poor variable names
-//TODO: Extract
-void MatPrint(int A[20][20], int n, int m);
+int calculateLargestMultipleInMatrix(vector<vector<int>> matrix, int numberOfMultiples, int xDirection, int yDirection);
 
 void Problem11::run() const {
-    
-    int A[20][20] = {
+
+    vector<vector<int>> matrix = {
         {8,2,22,97,38,15,0,40,0,75,4,5,7,78,52,12,50,77,91,8},
         {49,49,99,40,17,81,18,57,60,87,17,40,98,43,69,48,04,56,62,0},
         {81,49,31,73,55,79,14,29,93,71,40,67,53,88,30,3,49,13,36,65},
@@ -38,94 +41,50 @@ void Problem11::run() const {
         {20,73,35,29,78,31,90,01,74,31,49,71,48,86,81,16,23,57,05,54},
         {01,70,54,71,83,51,54,69,16,92,33,48,61,43,52,01,89,19,67,48}
     };
-    
-    int B[4],C[4];
-    
-    for (int i = 0; i < 4; i++) {
-        B[i]=A[1][i];
-    }
-    
-    int c = B[0] * B[1] * B[2] * B[3];
-    for (int i = 0; i < 20; i++) {
-        for(int j = 0; j < 17; j++) {
-            C[0] = A[i][j];
-            C[1] = A[i][j+1];
-            C[2] = A[i][j+2];
-            C[3] = A[i][j+3];
 
-            int d = C[0] * C[1] * C[2] * C[3];
-            if (d > c) {
-                B[0] = C[0];
-                B[1] = C[1];
-                B[2] = C[2];
-                B[3] = C[3];
-                c = d;
-            }
-        }
-    }
-    for (int i = 0; i < 20; i++) {
-        for(int j = 0; j < 17; j++) {
-            C[0] = A[j][i];
-            C[1] = A[j+1][i];
-            C[2] = A[j+2][i];
-            C[3] = A[j+3][i];
+    int largestMultipleHorizontally = calculateLargestMultipleInMatrix(matrix, 4, 1, 0);
+    int largestMultipleVertically = calculateLargestMultipleInMatrix(matrix, 4, 0, 1);
+    int largestMultipleForwardDiagonally = calculateLargestMultipleInMatrix(matrix, 4, 1, 1);
+    int largestMultipleBackwardDiagonally = calculateLargestMultipleInMatrix(matrix, 4, -1, 1);
 
-            int d = C[0] * C[1] * C[2] * C[3];
-            if(d > c) {
-                B[0] = C[0];
-                B[1] = C[1];
-                B[2] = C[2];
-                B[3] = C[3];
-                c = d;
-            }
-        }
-    }
-    for(int i = 0; i < 17; i++) {
-        for(int j = 0; j < 17; j++) {
-            C[0] = A[i][j];
-            C[1] = A[i+1][j+1];
-            C[2] = A[i+2][j+2];
-            C[3] = A[i+3][j+3];
-            
-            int d = C[0] * C[1] * C[2] * C[3];
-            if(d > c) {
-                B[0] = C[0];
-                B[1] = C[1];
-                B[2] = C[2];
-                B[3] = C[3];
-                c = d;
-            }
-        }
-    }
-    for (int i = 0; i< 17; i++) {
-        for (int j = 20; j >= 3; j = j-1) {
-            C[0] = A[i][j];
-            C[1] = A[i+1][j-1];
-            C[2] = A[i+2][j-2];
-            C[3] = A[i+3][j-3];
-            
-            int d = C[0] * C[1] * C[2] * C[3];
-            if(d > c) {
-                B[0] = C[0];
-                B[1] = C[1];
-                B[2] = C[2];
-                B[3] = C[3];
-                c = d;
-            }
-        }
-    }
-    cout << "The matrix A=" << endl;
-    MatPrint(A,20,20);
-    cout << "\nThe greatest product of four adjacent numbers in the same direction \n(up, down, left, right, or diagonally) in A is:" << endl;
-    cout << c << endl << endl;
+    int largestMultiple = 0;
+    largestMultiple = max(largestMultiple, largestMultipleHorizontally);
+    largestMultiple = max(largestMultiple, largestMultipleVertically);
+    largestMultiple = max(largestMultiple, largestMultipleForwardDiagonally);
+    largestMultiple = max(largestMultiple, largestMultipleBackwardDiagonally);
+
+    cout << "The matrix matrix=" << endl;
+    Printer::matPrint(matrix);
+    cout << "\nThe greatest product of four adjacent numbers in the same direction \n(up, down, left, right, or diagonally) in matrix is:" << endl;
+    cout << largestMultiple << endl << endl;
 }
 
-void MatPrint(int A[20][20],int n, int m) {
-    for (int i = 0; i < n; i++){
-        cout <<"\n";
-        for (int j = 0; j < m; j++) {
-            cout << setw(3) << A[i][j] << " ";
+int calculateLargestMultipleInMatrix(vector<vector<int>> matrix, int numberOfMultiples, int xDirection, int yDirection) {
+    int largestMultiple = 0;
+
+    for (int i = 0; i < matrix.size(); ++i) {
+        for(int j = 0; j < matrix[i].size(); ++j) {
+
+            int lastMultipleYPosition = i + numberOfMultiples * yDirection;
+            int lastMultipleXPosition = j + numberOfMultiples * xDirection;
+
+            if (lastMultipleYPosition < 0 || lastMultipleYPosition > matrix.size() || lastMultipleXPosition < 0 || lastMultipleXPosition > matrix[i].size()) {
+                continue;
+            }
+
+            int multiple = 1;
+
+            for (int k = 0; k < numberOfMultiples; ++k) {
+                multiple *= matrix[i + k * yDirection][j + k * xDirection];
+            }
+
+            if (multiple > largestMultiple) {
+                largestMultiple = multiple;
+            }
         }
     }
-    cout << "\n\n";
+    return largestMultiple;
 }
+
+
+
