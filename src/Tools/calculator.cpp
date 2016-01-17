@@ -6,7 +6,7 @@
 bool isPalindromic(vector<int> vector);
 
 /*
- * Calculates the sum of all integers less than @upTo that have at least one factor in @factors. 
+ * Calculates the sum of all integers less than @upTo that have at least one factor in @factors.
  */
 int Calculator::sumMulitplesOf(vector<int> factors, int upTo) {
     int sum = 0;
@@ -20,40 +20,40 @@ int Calculator::sumMulitplesOf(vector<int> factors, int upTo) {
 
 int Calculator::sumFibonacciMultiplesOf(vector<int> factors, int upTo) {
     int sum = 0, fibA = 1, fibB = 2;
-    
+
     if (Factoriser::hasFactorIn(fibA, factors)) {
         sum += fibA;
     }
-    
+
     if (Factoriser::hasFactorIn(fibB, factors)) {
         sum += fibB;
     }
-    
+
     while (fibA + fibB <= upTo) {
         for (vector<int>::iterator it = factors.begin(); it != factors.end(); ++it) {
-            
+
             int fib = fibA + fibB;
-            
+
             if (Factoriser::hasFactorIn(fib, factors)) {
                 sum += fib;
             }
-            
+
             fibA = fibB;
             fibB = fib;
         }
     }
-    
+
     return sum;
 }
 
 bool Calculator::isPalindromic(int n) {
     vector<int> nAsVector = Transformer::asVector(n);
-    
+
     return ::isPalindromic(nAsVector);
 }
 
 bool isPalindromic(vector<int> vector) {
-    for (int i = 0; i < vector.size() / 2; ++i) {
+    for (unsigned int i = 0; i < vector.size() / 2; ++i) {
         if (vector[i] != vector[vector.size() - i - 1]) {
             return false;
         }
@@ -86,23 +86,48 @@ bool Calculator::isPrime(int n) {
 
 long Calculator::sumNumbersFromTo(int from, int to) {
     long sum = 0;
-    
+
     for (int i = from; i <= to; ++i) {
         sum += i;
     }
-    
+
     return sum;
-    
+
 }
 
 long Calculator::sumSquaresFromTo(int from, int to) {
     long sum = 0;
-    
+
     for (int i = from; i <= to; ++i) {
         sum += (i * i);
     }
-    
+
     return sum;
-    
+
+}
+
+vector<int> Calculator::powerOfAsVector (int number, int power) {
+    vector<int> numberAsVector = Transformer::asVector(number);
+
+    for (int i = 1; i < power; ++i) {
+        for (unsigned int j = 0; j < numberAsVector.size(); ++j) {
+
+            numberAsVector[j] = numberAsVector[j] * number;
+
+            if (numberAsVector[j] >= 10) {
+                int tens = numberAsVector[j] / 10;
+
+                numberAsVector[j] = numberAsVector[j] % 10;
+                if (j == 0) {
+                    numberAsVector.insert(numberAsVector.begin(), tens);
+                    ++j;
+                } else {
+                    numberAsVector[j - 1] = numberAsVector[j - 1] + tens;
+                }
+            }
+        }
+    }
+
+    return numberAsVector;
 }
 

@@ -5,11 +5,9 @@
 #include <algorithm>
 #include <vector>
 #include <iostream>
-#include <iomanip>
 
 using std::cout;
 using std::endl;
-using std::setw;
 using std::vector;
 using std::max;
 
@@ -54,7 +52,7 @@ void Problem11::run() const {
     largestMultiple = max(largestMultiple, largestMultipleBackwardDiagonally);
 
     cout << "The matrix matrix=" << endl;
-    Printer::matPrint(matrix);
+    Printer::matPrint(matrix, 3);
     cout << "\nThe greatest product of four adjacent numbers in the same direction \n(up, down, left, right, or diagonally) in matrix is:" << endl;
     cout << largestMultiple << endl << endl;
 }
@@ -62,11 +60,11 @@ void Problem11::run() const {
 int calculateLargestMultipleInMatrix(vector<vector<int>> matrix, int numberOfMultiples, int xDirection, int yDirection) {
     int largestMultiple = 0;
 
-    for (int i = 0; i < matrix.size(); ++i) {
-        for(int j = 0; j < matrix[i].size(); ++j) {
+    for (unsigned int i = 0; i < matrix.size(); ++i) {
+        for(unsigned int j = 0; j < matrix[i].size(); ++j) {
 
-            int lastMultipleYPosition = i + numberOfMultiples * yDirection;
-            int lastMultipleXPosition = j + numberOfMultiples * xDirection;
+            unsigned int lastMultipleYPosition = i + numberOfMultiples * yDirection;
+            unsigned int lastMultipleXPosition = j + numberOfMultiples * xDirection;
 
             if (lastMultipleYPosition < 0 || lastMultipleYPosition > matrix.size() || lastMultipleXPosition < 0 || lastMultipleXPosition > matrix[i].size()) {
                 continue;

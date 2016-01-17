@@ -7,7 +7,7 @@ using std::vector;
 
 class Calculator {
     static Calculator calculator;
-    
+
 public:
     static Calculator& instace() {
         static Calculator instance;
@@ -20,7 +20,8 @@ public:
     long sumSquaresFromTo(int from, int to);
     bool isPalindromic(int n);
     bool isPrime(int n);
-    
+    vector<int> powerOfAsVector (int number, int power);
+
     private :
     Calculator() {};
 };
