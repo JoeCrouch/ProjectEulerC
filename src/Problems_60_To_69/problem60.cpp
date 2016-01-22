@@ -1,185 +1,121 @@
 //http://projecteuler.net/problem=60
 
 #include "problem60.h"
+#include "calculator.h"
+#include "searcher.h"
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
+#include <vector>
+#include <map>
 
 using std::cout;
 using std::endl;
+using std::vector;
+using std::map;
+using std::find;
 
 const Problem60 Problem60::INSTANCE = Problem60();
 
-//TODO: variable names!
-
-//TODO: extract
-// Concatenates two numbers i.e. conc(11,27)=1127
-int conc(int a, int b) {
-    int c = b;
-    while (c > 0) {
-        a *= 10;
-        c /= 10;
-    }
-    return a + b;
-}
-
-//TODO: extract
-// Checks if a number is prime
-bool isPrime60(int n) {
-    if (n <= 1) return false;
-    if (n == 2) return true;
-    if (n % 2 == 0) return false;
-    if (n < 9) return true;
-    if (n % 3 == 0) return false;
-    if (n % 5 == 0) return false;
-
-    for (int i = 7; i * i <= n; i++) {
-        if (n % i == 0) return false;
-    }
-    return true;
-}
-
-//TODO: extract
-//Checks which primes concatenate both ways round to another prime
-void ConcArray(int a, int sum, int Primes[],int **Pairs) {
-    for (int i = (a + 1); i < sum; i++) {
-        if(isPrime60(conc(Primes[a], Primes[i])) && isPrime60(conc(Primes[i], Primes[a]))) {
-            Pairs[a][i] = Primes[i];
-        }
-    }
-}
-
-//TODO: extract
-//This calculates the frequency of a given number within a certain column of an array
-int Contains(int a, int b, int sum, int **Pairs) {
-    int n = 0;
-    for(int i = a; i < sum; i++) {
-        if(Pairs[a][i] == b) {
-            n += 1;
-        }
-    }
-    return n;
-}
+vector<int> concatanatedPrimesGreaterThanPosition(int number, vector<int> primes);
 
 void Problem60::run() const {
-    //Set an upper bound
-    int a = 10000;
-    int A[a-1];
-    int MAX = 26033;
-
-    //TODO: extract
-    //TODO: could go up in 2s to save time after 2,3
-    //Creates an array containing 2,3,....,a
-    for (int i = 0; i < a - 1; i++) {
-        A[i] = i + 2;
-    }
-
-    //TODO: extract
-    //Removes the non prime elements of the array using sieve of Eratosthenes: http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
-    for (int i = 0; i * i < a; i++) {
-        if(A[i] != 0) {
-            for(int j = i + 3; j < a + 1; j++) {
-                if (j % A[i] == 0) {
-                    A[j-2] = 0;
-                }
-            }
-        }
-    }
-
-    int sum = 0;
-
-    //TODO: extract
-    //Counts the number of primes within the array
-    for (int i = 0; i < a - 1; i++) {
-        if (A[i] != 0) {
-            sum += 1;
-        }
-    }
-
-    //TODO: extract
-    //Creates an array that only contains the primes
-    int Primes[sum];
-    int j = 0;
-    for (int i = 0; i < sum; i++) {
-        while (A[j] == 0) {
-            j += 1;
-        }
-        Primes[i]=A[j];
-        j+=1;
-    }
-
-    //TODO: extract
-    //Creates a 2 dimiensional array of zeroes
-    int ** Pairs;
-    Pairs = new int*[sum];
+    int upperBoundForPrimes = 10000;
+    int lowerBoundForSumOfPrimes = 5 * upperBoundForPrimes;
     
-    for (int i = 0; i < sum; ++i) {
-        Pairs[i] = new int[sum];
-    }
+    Calculator calc = Calculator::instace();
+    vector<int> primes = calc.buildVectorOfPrimesBelow(upperBoundForPrimes);
 
-    for (int i = 0; i < sum; i++) {
-        for(int j = 0; j < sum; j++) {
-            Pairs[i][j]=0;
-        }
-    }
+    map<int, vector<int>> concatanatedPrimes;
 
-    // Checks which primes concatenate with each other to form another prime and creates an increasing set that do so
-    int b, c, d, e;
-    for (a = 1; a<sum; a++) {
-        if (Primes[a] * 5 > MAX) {
+    for (int a = 1; a < primes.size(); ++a) {
+        int primeA = primes[a];
+        
+        if (primeA * 5 > lowerBoundForSumOfPrimes) {
             break;
-        }else if (Contains(a, 0, sum, Pairs) == sum-a) {
-            ConcArray(a,sum,Primes,Pairs);
+        } else if (concatanatedPrimes.find(primeA) == concatanatedPrimes.end()) {
+            concatanatedPrimes[primeA] = concatanatedPrimesGreaterThanPosition(a, primes);
         }
+        
+        vector<int> concatanatedPrimesForA = concatanatedPrimes[primeA];
 
-        for (b = a + 1; b < sum; b++) {
-            if (Primes[a]+(Primes[b]*4) > MAX) {
+        for (int b = a + 1; b < primes.size(); ++b) {
+            int primeB = primes[b];
+            
+            if (primeA + primeB * 4 > lowerBoundForSumOfPrimes) {
                 break;
-            }
-            if (Contains(a,Primes[b],sum,Pairs)!=1) {
+            } else if (!Searcher::vectorContains(concatanatedPrimesForA, primeB)) {
                 continue;
-            }else if (Contains(b,0,sum,Pairs)==sum-b) {
-                ConcArray(b,sum,Primes,Pairs);
+            } else if (concatanatedPrimes.find(primeB) == concatanatedPrimes.end()) {
+                concatanatedPrimes[primeB] = concatanatedPrimesGreaterThanPosition(b, primes);
             }
+            
+            vector<int> concatanatedPrimesForB = concatanatedPrimes[primeB];
 
-            for (c=b+1; c<sum; c++) {
-                if ((Primes[a] + Primes[b] + (Primes[c] * 3)) > MAX) {
+            for (int c = b + 1; c < primes.size(); ++c) {
+                int primeC = primes[c];
+                
+                if (primeA + primeB + primeC * 3 > lowerBoundForSumOfPrimes) {
                     break;
-                }
-                if (!(Contains(a,Primes[c],sum,Pairs) && Contains(b, Primes[c], sum, Pairs))) {
+                } else if (!Searcher::vectorContains(concatanatedPrimesForA, primeC)
+                           || !Searcher::vectorContains(concatanatedPrimesForB, primeC)) {
                     continue;
+                } else if (concatanatedPrimes.find(primeC) == concatanatedPrimes.end()) {
+                    concatanatedPrimes[primeC] = concatanatedPrimesGreaterThanPosition(c, primes);
                 }
-                if ((Contains(c,0,sum,Pairs)) == sum - c) {
-                    ConcArray(c,sum,Primes,Pairs);
-                }
+                
+                vector<int> concatanatedPrimesForC = concatanatedPrimes[primeC];
 
-                for (d = c + 1; d < sum; d++) {
-                    if ((Primes[a] + Primes[b] + Primes[c] + (Primes[d] * 2)) > MAX) {
+                for (int d = c + 1; d < primes.size(); ++d) {
+                    int primeD = primes[d];
+                    
+                    if (primeA + primeB + primeC + primeD * 2 > lowerBoundForSumOfPrimes) {
                         break;
-                    }
-                    if (!(Contains(a,Primes[d],sum,Pairs) && Contains(b,Primes[d],sum,Pairs) && Contains(c,Primes[d],sum,Pairs)))  {
+                    } else if (!Searcher::vectorContains(concatanatedPrimesForA, primeD)
+                               || !Searcher::vectorContains(concatanatedPrimesForB, primeD)
+                               || !Searcher::vectorContains(concatanatedPrimesForC, primeD))  {
                        continue;
+                    } else if (concatanatedPrimes.find(primeD) == concatanatedPrimes.end()) {
+                        concatanatedPrimes[primeD] = concatanatedPrimesGreaterThanPosition(d, primes);
                     }
-                    if ((Contains(d,0,sum,Pairs)) == sum - d) {
-                        ConcArray(d,sum,Primes,Pairs);
-                    }
+                    
+                    vector<int> concatanatedPrimesForD = concatanatedPrimes[primeD];
 
-                    for (e = d + 1; e < sum; e++) {
-                        if((Primes[a] + Primes[b] + Primes[c] + Primes[d] + Primes[e]) > MAX) {
+                    for (int e = d + 1; e < primes.size(); ++e) {
+                        int primeE = primes[e];
+                        
+                        if(primeA + primeB + primeC + primeD + primeE > lowerBoundForSumOfPrimes) {
                             break;
-                        }
-                        if (!(Contains(a,Primes[e],sum,Pairs) && Contains(b,Primes[e],sum,Pairs) && Contains(c,Primes[e],sum,Pairs) && Contains(d,Primes[e],sum,Pairs)))  {
+                        } else if (!Searcher::vectorContains(concatanatedPrimesForA, primeE)
+                            || !Searcher::vectorContains(concatanatedPrimesForB, primeE)
+                            || !Searcher::vectorContains(concatanatedPrimesForC, primeE)
+                            || !Searcher::vectorContains(concatanatedPrimesForD, primeE)) {
                             continue;
                         }
                         
-                        int sum = Primes[a] + Primes[b] + Primes[c] + Primes[d] + Primes[e];
-                        cout << Primes[a] << " + " << Primes[b] << " + " << Primes[c] << " + " << Primes[d] << " + " << Primes[e] << " = " << sum << endl << endl;
-                        break;
-
+                        lowerBoundForSumOfPrimes = primeA + primeB + primeC + primeD + primeE;
+                        cout << "New Lower Bound: "
+                        << primeA << " + " << primeB << " + " << primeC << " + " << primeD << " + " << primeE
+                        << " = " << lowerBoundForSumOfPrimes
+                        << endl;
                     }
-                //Stops the for loop once the set of 5 numbers has been found
-                if((Primes[a] + Primes[b] + Primes[c] + Primes[d] + Primes[e]) == MAX) break;}
-            if((Primes[a] + Primes[b] + Primes[c] + Primes[d] + Primes[e]) == MAX) break;}
-        if((Primes[a] + Primes[b] + Primes[c] + Primes[d] + Primes[e]) == MAX) break;}
-    if((Primes[a] + Primes[b] + Primes[c] + Primes[d] + Primes[e]) == MAX) break;}
+                }
+            }
+        }
+    }
+}
+
+
+//Checks which primes concatenate both ways round to another prime
+vector<int> concatanatedPrimesGreaterThanPosition(int number, vector<int> primes) {
+    vector<int> concatanatedPrimesForNumber;
+    
+    Calculator calc = Calculator::instace();
+    for (int i = number + 1; i < primes.size(); i++) {
+        if (calc.isPrime(calc.conc(primes[number], primes[i])) && calc.isPrime(calc.conc(primes[i], primes[number]))) {
+            concatanatedPrimesForNumber.push_back(primes[i]);
+        }
+    }
+    
+    return concatanatedPrimesForNumber;
 }

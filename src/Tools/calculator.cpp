@@ -61,7 +61,7 @@ bool isPalindromic(vector<int> vector) {
     return true;
 }
 
-bool Calculator::isPrime(int n) {
+bool Calculator::isPrime(long n) {
     if (n <= 1) {
         return false;
     } else if (n == 2) {
@@ -75,7 +75,7 @@ bool Calculator::isPrime(int n) {
     } else if (n % 5 == 0) {
         return false;
     } else {
-        for (int i = 7; i * i <= n; ++i) {
+        for (int i = 7; i * i <= n; i += 2) {
             if (n % i == 0) {
                 return false;
             }
@@ -109,7 +109,7 @@ long Calculator::sumSquaresFromTo(int from, int to) {
 vector<int> Calculator::powerOfAsVector (int number, int power) {
     vector<int> numberAsVector = Transformer::asVector(number);
 
-    for (int i = 1; i < power; ++i) {
+    for (unsigned int i = 1; i < power; ++i) {
         for (unsigned int j = 0; j < numberAsVector.size(); ++j) {
 
             numberAsVector[j] = numberAsVector[j] * number;
@@ -130,4 +130,48 @@ vector<int> Calculator::powerOfAsVector (int number, int power) {
 
     return numberAsVector;
 }
+
+vector<int> Calculator::buildVectorOfPrimesBelow(int upperBound) {
+    vector<int> primes;
+    
+    if (upperBound < 2) {
+        return primes;
+    } else {
+        primes.push_back(2);
+    }
+    
+    vector<int> potentialPrimes;
+    //Creates a vector containing 3,5,7....
+    for (int i = 3; i < upperBound; i += 2) {
+        primes.push_back(i);
+    }
+    
+    //Removes the non prime elements of the vector using sieve of Eratosthenes: http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+    for (int i = 1; i < primes.size() / 2; ++i) {
+        if (primes[i] == 0) {
+            continue;
+        }
+        
+        for (int j = (3 * i + 1); j < primes.size(); j += (2 * i + 1)) {
+            primes[j] = 0;
+        }
+    }
+    
+    primes.erase(std::remove(primes.begin(), primes.end(), 0), primes.end());
+    
+    
+    return primes;
+}
+
+// Concatenates two numbers i.e. conc(11,27)=1127
+int Calculator::conc(int a, int b) {
+    int c = b;
+    while (c > 0) {
+        a *= 10;
+        c /= 10;
+    }
+    return a + b;
+}
+
+
 

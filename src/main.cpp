@@ -34,8 +34,7 @@ int main() {
         cin >> input;
         
         map<int, const Problem*>::iterator find = problems.find(input);
-        map<int, const Problem*>::iterator end = problems.end();
-        if (find != end) {
+        if (find != problems.end()) {
             
             cout << "Problem " << input << ": " << endl;
             
