@@ -20,24 +20,29 @@ vector<long> Factoriser::factorise(long long number) {
 }
 
 vector<long> factorise(long long number, long smallestPotentialPrime) {
-    vector<long int> primeFactors;
-    long d = 0;
+    vector<long> primeFactors;
+    long factor = 0;
     
-    //TODO: could use sieve of eras once extracted
     for(long i = smallestPotentialPrime; i * i < number; ++i) {
         if (number % i == 0) {
-            d = i;
+            factor = i;
             break;
         }
     }
     
-    if (d == 0) {
+    if (factor == 0) {
         primeFactors.push_back(number);
         return primeFactors;
     }
     
-    primeFactors.push_back(d);
-    vector<long int> otherFactors = factorise(number/d, d + 1);
+    primeFactors.push_back(factor);
+    
+    long long numberWithoutFactor = number / factor;
+    while (numberWithoutFactor % factor == 0) {
+        numberWithoutFactor = numberWithoutFactor / factor;
+    }
+    
+    vector<long> otherFactors = factorise(numberWithoutFactor, factor + 1);
     
     primeFactors.insert(primeFactors.end(), otherFactors.begin(), otherFactors.end());
     return primeFactors;
