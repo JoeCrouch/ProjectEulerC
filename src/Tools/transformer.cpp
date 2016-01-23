@@ -2,6 +2,8 @@
 #include "transformer.h"
 #include <stdio.h>
 
+using std::stoi;
+
 vector<int> Transformer::asVector(int n) {
     vector<int> nAsVector;
     
@@ -17,4 +19,15 @@ vector<int> Transformer::asVector(int n) {
     }
     
     return nAsVector;
+}
+
+vector<int> Transformer::asVector(string n) {
+    vector<int> stringAsIntVector;
+    
+    for (string::iterator it = n.begin(); it != n.end(); ++it) {
+        int digit = *it - '0';
+        stringAsIntVector.push_back(digit);
+    }
+    
+    return stringAsIntVector;
 }
