@@ -1,4 +1,4 @@
-//http://projecteuler.net/problem=9
+//http://projecteuler.net/problem=8
 
 #include "problem8.h"
 #include "transformer.h"

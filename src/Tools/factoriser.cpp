@@ -33,3 +33,20 @@ vector<long> Factoriser::factorise(long long number) {
     
     return primeFactors;
 }
+
+int Factoriser::numberOfDivisorsFor(long number) {
+    int numberOfDivisors = 0;
+    
+    int i;
+    for (i = 1; i * i <= number; ++i) {
+        if (number % i == 0) {
+            numberOfDivisors += 2;;
+        }
+    }
+    
+    if (i * i == number) {
+        numberOfDivisors--;
+    }
+    
+    return numberOfDivisors;
+}

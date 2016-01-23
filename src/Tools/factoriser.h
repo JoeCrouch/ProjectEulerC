@@ -11,6 +11,7 @@ public:
     
     static bool hasFactorIn(int number, vector<int> factors);
     static vector<long> factorise(long long number);
+    static int numberOfDivisorsFor(long number);
     
 private :
     Factoriser() {};
