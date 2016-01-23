@@ -20,9 +20,11 @@ public:
     long sumSquaresFromTo(int from, int to);
     bool isPalindromic(int n);
     bool isPrime(long n);
-    vector<int> powerOfAsVector (int number, int power);
+    int powerOf(int number, int power);
+    vector<int> powerOfAsVector(int number, int power);
     vector<int> buildVectorOfPrimesBelow(int upperBound);
     int conc(int a, int b);
+    long lowestCommonDenominator(vector<int> numbers);
 
     private :
     Calculator() {};

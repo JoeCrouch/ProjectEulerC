@@ -2,6 +2,10 @@
 #include "calculator.h"
 #include "factoriser.h"
 #include "transformer.h"
+#include <map>
+
+using std::map;
+using std::max_element;
 
 bool isPalindromic(vector<int> vector);
 
@@ -106,6 +110,16 @@ long Calculator::sumSquaresFromTo(int from, int to) {
 
 }
 
+int Calculator::powerOf(int number, int power) {
+    int result = 1;
+    
+    for (int i = 0; i < power; ++i) {
+        result *= number;
+    }
+    
+    return result;
+}
+
 vector<int> Calculator::powerOfAsVector (int number, int power) {
     vector<int> numberAsVector = Transformer::asVector(number);
 
@@ -171,6 +185,32 @@ int Calculator::conc(int a, int b) {
         c /= 10;
     }
     return a + b;
+}
+
+long Calculator::lowestCommonDenominator(vector<int> numbers) {
+    int maxNumber = *max_element(numbers.begin(), numbers.end());
+    
+    vector<int> primes = buildVectorOfPrimesBelow(maxNumber + 1);
+    map<int, vector<long>> factors;
+    
+    for (vector<int>::iterator it = numbers.begin(); it != numbers.end(); ++it) {
+        factors[*it] = Factoriser::factorise(*it);
+    }
+    
+    long product = 1;
+    for (vector<int>::iterator primesIt = primes.begin(); primesIt != primes.end(); ++primesIt) {
+        int prime = *primesIt;
+        int maxOfPrime = 0;
+        for (map<int, vector<long>>::iterator factorsMapIt = factors.begin(); factorsMapIt != factors.end(); ++factorsMapIt) {
+            vector<long> vectorOfFactors = factorsMapIt->second;
+            int numberOfPrime = (int) count(vectorOfFactors.begin(), vectorOfFactors.end(), prime);
+            
+            maxOfPrime = numberOfPrime > maxOfPrime ? numberOfPrime : maxOfPrime;
+        }
+        product *= powerOf(prime, maxOfPrime);
+    }
+    
+    return product;
 }
 
 

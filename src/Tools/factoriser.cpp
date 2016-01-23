@@ -15,35 +15,21 @@ bool Factoriser::hasFactorIn(int number, vector<int> factors) {
 }
 
 vector<long> Factoriser::factorise(long long number) {
-    long smallestPrime = 2;
-    return ::factorise(number, smallestPrime);
-}
-
-vector<long> factorise(long long number, long smallestPotentialPrime) {
     vector<long> primeFactors;
     long factor = 0;
+    long long numberWithoutFactor = number;
     
-    for(long i = smallestPotentialPrime; i * i < number; ++i) {
-        if (number % i == 0) {
+    for(long i = 2; i * i <= numberWithoutFactor; ++i) {
+        while (numberWithoutFactor % i == 0) {
             factor = i;
-            break;
+            numberWithoutFactor = numberWithoutFactor / factor;
+            primeFactors.push_back(factor);
         }
     }
     
-    if (factor == 0) {
-        primeFactors.push_back(number);
-        return primeFactors;
+    if (numberWithoutFactor > 1) {
+        primeFactors.push_back(numberWithoutFactor);
     }
     
-    primeFactors.push_back(factor);
-    
-    long long numberWithoutFactor = number / factor;
-    while (numberWithoutFactor % factor == 0) {
-        numberWithoutFactor = numberWithoutFactor / factor;
-    }
-    
-    vector<long> otherFactors = factorise(numberWithoutFactor, factor + 1);
-    
-    primeFactors.insert(primeFactors.end(), otherFactors.begin(), otherFactors.end());
     return primeFactors;
 }
