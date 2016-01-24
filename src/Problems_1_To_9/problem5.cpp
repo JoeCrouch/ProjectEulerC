@@ -16,14 +16,13 @@ using std::count;
 const Problem5 Problem5::INSTANCE = Problem5();
 
 void Problem5::run() const {
-    Calculator calc = Calculator::instace();
-    
     vector<int> numbers;
+    
     for (int i = 2; i <= 21; ++i) {
         numbers.push_back(i);
     }
     
-    long lowestCommonDenominator = calc.lowestCommonDenominator(numbers);
+    long lowestCommonDenominator = Calculator::lowestCommonDenominator(numbers);
     
     cout << "The lowest common denominator of the numbers 1,2,..,20 is: " << lowestCommonDenominator << endl << endl;
 }

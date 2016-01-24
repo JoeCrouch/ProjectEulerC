@@ -1,7 +1,7 @@
 //http://projecteuler.net/problem=7
 
 #include "problem7.h"
-#include "calculator.h"
+#include "primeCalculator.h"
 #include <iostream>
 
 using std::cout;
@@ -13,10 +13,9 @@ const Problem7 Problem7::INSTANCE = Problem7();
 
 void Problem7::run() const {
     int primeCount = 0, number = 2, primeNumber = 0;
-    Calculator calc = Calculator::instace();
     
     while (primeCount < 10001) {
-        if (calc.isPrime(number)) {
+        if (PrimeCalculator::isPrime(number)) {
             primeNumber = number;
             primeCount = primeCount + 1;
         }

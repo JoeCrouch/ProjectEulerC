@@ -10,9 +10,8 @@ using std::endl;
 const Problem6 Problem6::INSTANCE = Problem6();
 
 void Problem6::run() const {
-    Calculator calc = Calculator::instace();
-    long sumOfFirst100Numbers = calc.sumNumbersFromTo(1, 100);
-    long sumOfSquaresOfFirst100Numbers = calc.sumSquaresFromTo(1, 100);
+    long sumOfFirst100Numbers = Calculator::sumNumbersFromTo(1, 100);
+    long sumOfSquaresOfFirst100Numbers = Calculator::sumSquaresFromTo(1, 100);
     
     cout << "The sum of the squares of the first 100 natural numbers is:" << endl;
     cout << sumOfSquaresOfFirst100Numbers << endl << endl;

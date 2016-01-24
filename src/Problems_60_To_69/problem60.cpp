@@ -2,6 +2,7 @@
 
 #include "problem60.h"
 #include "calculator.h"
+#include "primeCalculator.h"
 #include "searcher.h"
 #include <iostream>
 #include <cmath>
@@ -23,8 +24,7 @@ void Problem60::run() const {
     int upperBoundForPrimes = 10000;
     int lowerBoundForSumOfPrimes = 5 * upperBoundForPrimes;
     
-    Calculator calc = Calculator::instace();
-    vector<int> primes = calc.buildVectorOfPrimesBelow(upperBoundForPrimes);
+    vector<int> primes = PrimeCalculator::buildVectorOfPrimesBelow(upperBoundForPrimes);
 
     map<int, vector<int>> concatanatedPrimes;
 
@@ -110,9 +110,10 @@ void Problem60::run() const {
 vector<int> concatanatedPrimesGreaterThanPosition(int number, vector<int> primes) {
     vector<int> concatanatedPrimesForNumber;
     
-    Calculator calc = Calculator::instace();
     for (int i = number + 1; i < primes.size(); i++) {
-        if (calc.isPrime(calc.conc(primes[number], primes[i])) && calc.isPrime(calc.conc(primes[i], primes[number]))) {
+        if (PrimeCalculator::isPrime(Calculator::conc(primes[number], primes[i]))
+            && PrimeCalculator::isPrime(Calculator::conc(primes[i], primes[number]))) {
+            
             concatanatedPrimesForNumber.push_back(primes[i]);
         }
     }

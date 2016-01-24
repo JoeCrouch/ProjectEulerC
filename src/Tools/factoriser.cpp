@@ -1,5 +1,4 @@
 
-#include <stdio.h>
 #include "factoriser.h"
 
 vector<long> factorise(long long number, long smallestPotentialPrime);
@@ -34,14 +33,15 @@ vector<long> Factoriser::factorise(long long number) {
     return primeFactors;
 }
 
-vector<int> Factoriser::divisorsFor(long number) {
-    vector<int> numberOfDivisors;
+vector<long> Factoriser::divisorsFor(long number) {
+    vector<long> numberOfDivisors;
     
-    int i;
+    
+    long i;
     for (i = 1; i * i <= number; ++i) {
         if (number % i == 0) {
             numberOfDivisors.push_back(i);
-            numberOfDivisors.push_back((int) number / i);
+            numberOfDivisors.push_back(number / i);
         }
     }
     

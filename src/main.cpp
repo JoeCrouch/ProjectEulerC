@@ -39,7 +39,7 @@ int main() {
         map<int, const Problem*>::iterator find = problems.find(input);
         if (find != problems.end()) {
             
-            cout << "Problem " << input << ": " << endl;
+            cout << "Problem " << input << ": " << endl << endl;
             
             clock_t t1 = clock();
             

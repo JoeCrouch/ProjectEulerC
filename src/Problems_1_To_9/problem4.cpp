@@ -18,12 +18,10 @@ vector<int> asVector(int n);
 void Problem4::run() const {
     int largestPalindromicProduct = 0, threeDigit1 = 0, threeDigit2 = 0;
     
-    Calculator calculator = Calculator::instace();
-    
     for (int i = 999; i >= 100; i--) {
         for(int j = i; j >= threeDigit2; j--) {
             int product = i * j;
-            if (product > largestPalindromicProduct && calculator.isPalindromic(product)) {
+            if (product > largestPalindromicProduct && Calculator::isPalindromic(product)) {
                 largestPalindromicProduct = product;
                 threeDigit1 = i;
                 threeDigit2 = j;

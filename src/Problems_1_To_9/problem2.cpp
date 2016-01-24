@@ -14,8 +14,6 @@ const Problem2 Problem2::INSTANCE = Problem2();
 void Problem2::run() const {
     vector<int> factors = {2};
     
-    Calculator calculator = Calculator::instace();
-    
     cout << "By considering the terms in the Fibonacci sequence whose values do not exceed four million, the sum of the even-valued terms is: " << endl;
-    cout << calculator.sumFibonacciMultiplesOf(factors, 4000000) << endl << endl;
+    cout << Calculator::sumFibonacciMultiplesOf(factors, 4000000) << endl << endl;
 }

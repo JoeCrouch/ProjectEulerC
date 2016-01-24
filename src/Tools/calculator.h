@@ -6,27 +6,20 @@
 using std::vector;
 
 class Calculator {
-    static Calculator calculator;
 
 public:
-    static Calculator& instace() {
-        static Calculator instance;
-        return instance;
-    };
 
-    int sumMulitplesOf(vector<int> factors, int upTo);
-    int sumFibonacciMultiplesOf(vector<int> factors, int upTo);
-    long sumNumbersFromTo(int from, int to);
-    long sumSquaresFromTo(int from, int to);
-    bool isPalindromic(int n);
-    bool isPrime(long n);
-    int powerOf(int number, int power);
-    vector<int> powerOfAsVector(int number, int power);
-    vector<int> buildVectorOfPrimesBelow(int upperBound);
-    int conc(int a, int b);
-    long lowestCommonDenominator(vector<int> numbers);
+    static int sumMulitplesOf(vector<int> factors, int upTo);
+    static int sumFibonacciMultiplesOf(vector<int> factors, int upTo);
+    static long sumNumbersFromTo(int from, int to);
+    static long sumSquaresFromTo(int from, int to);
+    static bool isPalindromic(int n);
+    static int powerOf(int number, int power);
+    static vector<int> powerOfAsVector(int number, int power);
+    static int conc(int a, int b);
+    static long lowestCommonDenominator(vector<int> numbers);
 
-    private :
+private :
     Calculator() {};
 };
 

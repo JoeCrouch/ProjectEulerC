@@ -18,8 +18,7 @@ const Problem16 Problem16::INSTANCE = Problem16();
 vector<int> powerOfAsVector(int number,int power);
 
 void Problem16::run() const {
-    Calculator calc = Calculator::instace();
-    vector<int> numberAsVector = calc.powerOfAsVector(2, 1000);
+    vector<int> numberAsVector = Calculator::powerOfAsVector(2, 1000);
     int sum = 0;
 
     for (unsigned int i = 0; i < numberAsVector.size(); ++i) {
