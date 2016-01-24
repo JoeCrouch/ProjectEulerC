@@ -34,18 +34,19 @@ vector<long> Factoriser::factorise(long long number) {
     return primeFactors;
 }
 
-int Factoriser::numberOfDivisorsFor(long number) {
-    int numberOfDivisors = 0;
+vector<int> Factoriser::divisorsFor(long number) {
+    vector<int> numberOfDivisors;
     
     int i;
     for (i = 1; i * i <= number; ++i) {
         if (number % i == 0) {
-            numberOfDivisors += 2;;
+            numberOfDivisors.push_back(i);
+            numberOfDivisors.push_back((int) number / i);
         }
     }
     
     if (i * i == number) {
-        numberOfDivisors--;
+        numberOfDivisors.pop_back();
     }
     
     return numberOfDivisors;

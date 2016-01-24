@@ -17,7 +17,7 @@ void Problem12::run() const {
     int j = 2;
     while(numberOfDivisors < 501) {
         triangleNumber += j;
-        numberOfDivisors = Factoriser::numberOfDivisorsFor(triangleNumber);
+        numberOfDivisors = Factoriser::divisorsFor(triangleNumber).size();
         ++j;
     }
     
