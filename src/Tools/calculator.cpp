@@ -51,6 +51,46 @@ int Calculator::sumFibonacciMultiplesOf(vector<int> factors, int upTo) {
     return sum;
 }
 
+vector<int> Calculator::sumOfVectors(vector<int> vector1, vector<int> vector2) {
+    vector<int> sumOfVectors;
+    
+    if (vector1.size() == 0) {
+        sumOfVectors = vector2;
+        return sumOfVectors;
+    } else if (vector2.size() == 0) {
+        sumOfVectors = vector1;
+        return sumOfVectors;
+    }
+    
+    bool vector1IsLargerThanVector2 = vector1.size() > vector2.size();
+    
+    sumOfVectors = vector1IsLargerThanVector2 ? vector1 : vector2;
+    vector<int> smallerVector = vector1IsLargerThanVector2 ? vector2 : vector1;
+    
+    long smallerVectorSize = smallerVector.size();
+    for(int i = 0; i < smallerVectorSize; ++i) {
+        long sumEntry = sumOfVectors.size() - smallerVectorSize + i;
+        sumOfVectors[sumEntry] += smallerVector[i];
+        
+        unsigned long k = sumEntry;
+        while (sumOfVectors[k] >= 10) {
+            int tens = sumOfVectors[k] / 10;
+            
+            sumOfVectors[k] = sumOfVectors[k] % 10;
+            if (k == 0) {
+                sumOfVectors.insert(sumOfVectors.begin(), tens);
+                ++k;
+            } else {
+                sumOfVectors[k - 1] = sumOfVectors[k - 1] + tens;
+            }
+            
+            k--;
+        }
+    }
+    
+    return sumOfVectors;
+}
+
 bool Calculator::isPalindromic(int n) {
     vector<int> nAsVector = Transformer::asVector(n);
 
@@ -106,16 +146,20 @@ vector<int> Calculator::powerOfAsVector (int number, int power) {
 
             numberAsVector[j] = numberAsVector[j] * number;
 
-            if (numberAsVector[j] >= 10) {
-                int tens = numberAsVector[j] / 10;
+            unsigned int k = j;
+            while (numberAsVector[k] >= 10) {
+                int tens = numberAsVector[k] / 10;
 
-                numberAsVector[j] = numberAsVector[j] % 10;
-                if (j == 0) {
+                numberAsVector[k] = numberAsVector[k] % 10;
+                if (k == 0) {
                     numberAsVector.insert(numberAsVector.begin(), tens);
                     ++j;
+                    ++k;
                 } else {
-                    numberAsVector[j - 1] = numberAsVector[j - 1] + tens;
+                    numberAsVector[k - 1] = numberAsVector[k - 1] + tens;
                 }
+                
+                k--;
             }
         }
     }
