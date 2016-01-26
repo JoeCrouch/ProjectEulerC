@@ -13,6 +13,7 @@ class Transformer {
 public:
     static vector<int> asVector(int n);
     static vector<int> asVector(string n);
+    static string numberAsWord(int number);
     
 private:
     Transformer() {};
