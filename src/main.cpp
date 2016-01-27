@@ -15,6 +15,7 @@
 #include "problem15.h"
 #include "problem16.h"
 #include "problem17.h"
+#include "problem18.h"
 #include "problem60.h"
 
 #include <iostream>
@@ -85,6 +86,7 @@ map<int, const Problem*> availableProblems() {
         problems[15] = &(Problem15::INSTANCE);
         problems[16] = &(Problem16::INSTANCE);
         problems[17] = &(Problem17::INSTANCE);
+        problems[18] = &(Problem18::INSTANCE);
         problems[60] = &(Problem60::INSTANCE);
     }
     
