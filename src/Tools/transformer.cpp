@@ -1,6 +1,10 @@
 
 #include "transformer.h"
 #include <stdio.h>
+#include <sstream>
+
+using std::stringstream;
+using std::stoi;
 
 string tensAsWord(int tens);
 
@@ -27,6 +31,18 @@ vector<int> Transformer::asVector(string n) {
     for (string::iterator it = n.begin(); it != n.end(); ++it) {
         int digit = *it - '0';
         stringAsIntVector.push_back(digit);
+    }
+    
+    return stringAsIntVector;
+}
+
+vector<int> Transformer::asVector(string n, char delimeter) {
+    vector<int> stringAsIntVector;
+    stringstream ss(n);
+    
+    string num;
+    while (getline(ss, num, delimeter)) {
+        stringAsIntVector.push_back(stoi(num));
     }
     
     return stringAsIntVector;

@@ -1,15 +1,13 @@
 //http://projecteuler.net/problem=18
 
 #include "problem18.h"
+#include "calculator.h"
 #include <iostream>
 #include <vector>
 
 using std::cout;
 using std::endl;
 using std::vector;
-using std::max;
-
-int maxTotalForTrianglePath(vector<vector<int>> triangle);
 
 const Problem18 Problem18::INSTANCE = Problem18();
 
@@ -32,32 +30,9 @@ vector<vector<int>> triangle = {
 };
 
 void Problem18::run() const {
-    int maxTotal = maxTotalForTrianglePath(triangle);
+    int maxTotal = Calculator::maxTotalForTrianglePath(triangle);
     
     cout << "Path With Greatest Sum From Top To Bottom Is: " << maxTotal << endl << endl;
-}
-
-
-int maxTotalForTrianglePath(vector<vector<int>> triangle) {
-    if (triangle.size() == 2) {
-        int topPosition = triangle[0][0];
-        int bottomPosition1 = triangle[1][0];
-        int bottomPosition2 = triangle[1][1];
-        return topPosition + max(bottomPosition1, bottomPosition2);
-    } else {
-        vector<vector<int>> smallerTriangle = triangle;
-        
-        vector<int> bottomRow = smallerTriangle[smallerTriangle.size() - 1];
-        smallerTriangle.pop_back();
-        
-        vector<int> secondFromBottomRow = smallerTriangle[smallerTriangle.size() - 1];
-        
-        for (int i = 0; i < secondFromBottomRow.size(); ++i) {
-            smallerTriangle[smallerTriangle.size() - 1][i] = secondFromBottomRow[i] + max(bottomRow[i], bottomRow[i + 1]);
-        }
-        
-        return maxTotalForTrianglePath(smallerTriangle);
-    }
 }
 
 
