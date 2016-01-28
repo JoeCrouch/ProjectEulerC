@@ -16,6 +16,7 @@
 #include "problem16.h"
 #include "problem17.h"
 #include "problem18.h"
+#include "problem19.h"
 #include "problem60.h"
 #include "problem67.h"
 
@@ -36,21 +37,21 @@ map<int, const Problem*> availableProblems();
 map<int, const Problem*> problems = availableProblems();
 
 int main() {
-    
+
     int input = 0;
     while (input != -1) {
         cout << endl << "Which Problem Would You Like To Run? (Enter -1 To Stop Running Programs)" << endl;
         cin >> input;
-        
+
         map<int, const Problem*>::iterator find = problems.find(input);
         if (find != problems.end()) {
-            
+
             cout << "Problem " << input << ": " << endl << endl;
-            
+
             clock_t t1 = clock();
-            
+
             find->second->run();
-            
+
             clock_t t2 = clock();
             double time = (double) (t2 - t1) / CLOCKS_PER_SEC;
             cout << fixed << "Time Taken = " << time << " seconds." << endl;
@@ -68,7 +69,7 @@ int main() {
 
 map<int, const Problem*> availableProblems() {
     static map<int, const Problem*> problems;
-    
+
     if (problems.size() == 0) {
         problems[1] = &(Problem1::INSTANCE);
         problems[2] = &(Problem2::INSTANCE);
@@ -88,9 +89,10 @@ map<int, const Problem*> availableProblems() {
         problems[16] = &(Problem16::INSTANCE);
         problems[17] = &(Problem17::INSTANCE);
         problems[18] = &(Problem18::INSTANCE);
+        problems[19] = &(Problem19::INSTANCE);
         problems[60] = &(Problem60::INSTANCE);
         problems[67] = &(Problem67::INSTANCE);
     }
-    
+
     return problems;
 }
