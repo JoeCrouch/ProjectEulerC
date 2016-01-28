@@ -12,7 +12,7 @@ int isPrime10(long int n);
 const Problem10 Problem10::INSTANCE = Problem10();
 
 void Problem10::run() const {
-    long sum = 2;
+    long long sum = 2;
 
     for (long number = 3; number < 2000000; number += 2) {
         if (PrimeCalculator::isPrime(number)) {

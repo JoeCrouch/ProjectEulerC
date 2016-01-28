@@ -9,7 +9,7 @@ using std::endl;
 using std::max;
 using std::map;
 
-long collatzFunction(long n);
+long long collatzFunction(long long n);
 
 const Problem14 Problem14::INSTANCE = Problem14();
 
@@ -18,11 +18,11 @@ void Problem14::run() const {
     int start = 999999;
     int numberWithMaxChain = start;
     int maxChainLength = 1;
-    
+
     for (int i = start; 2 * i > start; --i) {
         int chainLength = 1;
-        long number = i;
-        
+        long long number = i;
+
         while (number != 1) {
             if (number > i && number < start) {
                 chainLength += cache[(int) number];
@@ -34,19 +34,20 @@ void Problem14::run() const {
             number = collatzFunction(number);
             chainLength++;
         }
-        
+
         cache[i] = chainLength;
-        
+
         if (chainLength > maxChainLength) {
             maxChainLength = chainLength;
             numberWithMaxChain = i;
         }
     }
-    
+
     cout << "Number Below 1 Mill With Longest Collatz Chain is: " << numberWithMaxChain << endl << endl;
 }
 
-long collatzFunction(long n) {
+long long collatzFunction(long long n) {
+    int a = n;
     if (n % 2 == 0) {
         return n / 2;
     } else {

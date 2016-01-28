@@ -17,26 +17,26 @@ string numberString = "731671765313306249192251196744265747423553491949349698352
 
 void Problem8::run() const {
     vector<int> numberVector = Transformer::asVector(numberString);
-    
-    long maxProduct = 0;
+
+    long long maxProduct = 0;
     for (int i = 0; i < numberVector.size() - 13; ++i) {
-        long product = 1;
+        long long product = 1;
         for (int j = i; j < i + 13; ++j) {
-            
+
             int digit = numberVector[j];
             if (digit == 0) {
                 goto exit;
             }
-            
+
             product *= digit;
         }
         maxProduct = product > maxProduct ? product : maxProduct;
-        
+
     exit:
         if (numberVector[i + 13] < numberVector[i]) {
             ++i;
         }
     }
-    
+
     cout << "The greatest product of thirteen adjacent digits is: " << maxProduct << endl << endl;
 }

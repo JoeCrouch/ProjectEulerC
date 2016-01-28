@@ -4,6 +4,8 @@
 #include "factoriser.h"
 #include "transformer.h"
 #include <map>
+#include <algorithm>
+#include <stdexcept>
 
 using std::map;
 using std::max_element;
@@ -56,7 +58,7 @@ int Calculator::sumFibonacciMultiplesOf(vector<int> factors, int upTo) {
 
 vector<int> Calculator::sumOfVectors(vector<int> vector1, vector<int> vector2) {
     vector<int> sumOfVectors;
-    
+
     if (vector1.size() == 0) {
         sumOfVectors = vector2;
         return sumOfVectors;
@@ -64,21 +66,21 @@ vector<int> Calculator::sumOfVectors(vector<int> vector1, vector<int> vector2) {
         sumOfVectors = vector1;
         return sumOfVectors;
     }
-    
+
     bool vector1IsLargerThanVector2 = vector1.size() > vector2.size();
-    
+
     sumOfVectors = vector1IsLargerThanVector2 ? vector1 : vector2;
     vector<int> smallerVector = vector1IsLargerThanVector2 ? vector2 : vector1;
-    
+
     long smallerVectorSize = smallerVector.size();
     for(int i = 0; i < smallerVectorSize; ++i) {
         long sumEntry = sumOfVectors.size() - smallerVectorSize + i;
         sumOfVectors[sumEntry] += smallerVector[i];
-        
+
         unsigned long k = sumEntry;
         while (sumOfVectors[k] >= 10) {
             int tens = sumOfVectors[k] / 10;
-            
+
             sumOfVectors[k] = sumOfVectors[k] % 10;
             if (k == 0) {
                 sumOfVectors.insert(sumOfVectors.begin(), tens);
@@ -86,11 +88,11 @@ vector<int> Calculator::sumOfVectors(vector<int> vector1, vector<int> vector2) {
             } else {
                 sumOfVectors[k - 1] = sumOfVectors[k - 1] + tens;
             }
-            
+
             k--;
         }
     }
-    
+
     return sumOfVectors;
 }
 
@@ -133,11 +135,11 @@ long Calculator::sumSquaresFromTo(int from, int to) {
 
 int Calculator::powerOf(int number, int power) {
     int result = 1;
-    
+
     for (int i = 0; i < power; ++i) {
         result *= number;
     }
-    
+
     return result;
 }
 
@@ -161,7 +163,7 @@ vector<int> Calculator::powerOfAsVector (int number, int power) {
                 } else {
                     numberAsVector[k - 1] = numberAsVector[k - 1] + tens;
                 }
-                
+
                 k--;
             }
         }
@@ -182,14 +184,14 @@ int Calculator::conc(int a, int b) {
 
 long Calculator::lowestCommonDenominator(vector<int> numbers) {
     int maxNumber = *max_element(numbers.begin(), numbers.end());
-    
+
     vector<int> primes = PrimeCalculator::buildVectorOfPrimesBelow(maxNumber + 1);
     map<int, vector<long>> factors;
-    
+
     for (vector<int>::iterator it = numbers.begin(); it != numbers.end(); ++it) {
         factors[*it] = Factoriser::factorise(*it);
     }
-    
+
     long product = 1;
     for (vector<int>::iterator primesIt = primes.begin(); primesIt != primes.end(); ++primesIt) {
         int prime = *primesIt;
@@ -197,12 +199,12 @@ long Calculator::lowestCommonDenominator(vector<int> numbers) {
         for (map<int, vector<long>>::iterator factorsMapIt = factors.begin(); factorsMapIt != factors.end(); ++factorsMapIt) {
             vector<long> vectorOfFactors = factorsMapIt->second;
             int numberOfPrime = (int) count(vectorOfFactors.begin(), vectorOfFactors.end(), prime);
-            
+
             maxOfPrime = numberOfPrime > maxOfPrime ? numberOfPrime : maxOfPrime;
         }
         product *= powerOf(prime, maxOfPrime);
     }
-    
+
     return product;
 }
 
@@ -227,16 +229,16 @@ int maxTotalForVerifiedTrianglePath(vector<vector<int>> triangle) {
         return topPosition + max(bottomPosition1, bottomPosition2);
     } else {
         vector<vector<int>> smallerTriangle = triangle;
-        
+
         vector<int> bottomRow = smallerTriangle[smallerTriangle.size() - 1];
         smallerTriangle.pop_back();
-        
+
         vector<int> secondFromBottomRow = smallerTriangle[smallerTriangle.size() - 1];
-        
+
         for (int i = 0; i < secondFromBottomRow.size(); ++i) {
             smallerTriangle[smallerTriangle.size() - 1][i] = secondFromBottomRow[i] + max(bottomRow[i], bottomRow[i + 1]);
         }
-        
+
         return maxTotalForVerifiedTrianglePath(smallerTriangle);
     }
 }

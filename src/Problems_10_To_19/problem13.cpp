@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cstring>
 
 using std::cout;
 using std::endl;
@@ -119,14 +120,14 @@ char numbersString[] =
 
 void Problem13::run() const {
     char * numberString = strtok(numbersString, "\n");
-    
+
     vector<int> sumOfVectors;
     while (numberString != NULL) {
         vector<int> numberVector = Transformer::asVector(numberString);
         sumOfVectors = Calculator::sumOfVectors(sumOfVectors, numberVector);
         numberString = strtok(NULL, "\n");
     }
-    
+
     cout << "The Sum Of The Vectors Is: " << endl;
     Printer::vecPrint(sumOfVectors, 1);
     cout << endl;
