@@ -19,9 +19,9 @@ void Problem8::run() const {
     vector<int> numberVector = Transformer::asVector(numberString);
 
     long long maxProduct = 0;
-    for (int i = 0; i < numberVector.size() - 13; ++i) {
+    for (unsigned int i = 0; i < numberVector.size() - 13; ++i) {
         long long product = 1;
-        for (int j = i; j < i + 13; ++j) {
+        for (unsigned int j = i; j < i + 13; ++j) {
 
             int digit = numberVector[j];
             if (digit == 0) {

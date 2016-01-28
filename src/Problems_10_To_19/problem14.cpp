@@ -47,7 +47,6 @@ void Problem14::run() const {
 }
 
 long long collatzFunction(long long n) {
-    int a = n;
     if (n % 2 == 0) {
         return n / 2;
     } else {

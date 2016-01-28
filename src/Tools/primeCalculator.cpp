@@ -41,12 +41,12 @@ vector<int> PrimeCalculator::buildVectorOfPrimesBelow(long upperBound) {
     }
 
     //Removes the non prime elements of the vector using sieve of Eratosthenes: http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
-    for (int i = 1; i < primes.size() / 2; ++i) {
+    for (unsigned int i = 1; i < primes.size() / 2; ++i) {
         if (primes[i] == 0) {
             continue;
         }
 
-        for (int j = (3 * i + 1); j < primes.size(); j += (2 * i + 1)) {
+        for (unsigned int j = (3 * i + 1); j < primes.size(); j += (2 * i + 1)) {
             primes[j] = 0;
         }
     }

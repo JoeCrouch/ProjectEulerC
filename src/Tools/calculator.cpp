@@ -146,7 +146,7 @@ int Calculator::powerOf(int number, int power) {
 vector<int> Calculator::powerOfAsVector (int number, int power) {
     vector<int> numberAsVector = Transformer::asVector(number);
 
-    for (unsigned int i = 1; i < power; ++i) {
+    for (int i = 1; i < power; ++i) {
         for (unsigned int j = 0; j < numberAsVector.size(); ++j) {
 
             numberAsVector[j] = numberAsVector[j] * number;
@@ -214,7 +214,7 @@ int Calculator::maxTotalForTrianglePath(vector<vector<int>> triangle) {
 }
 
 void verifyIsTriangle(vector<vector<int>> triangle) {
-    for (int i = 0; i < triangle.size(); ++i) {
+    for (unsigned int i = 0; i < triangle.size(); ++i) {
         if (triangle[i].size() != i + 1) {
             throw std::runtime_error("vector must be triangle shape");
         }
@@ -235,12 +235,41 @@ int maxTotalForVerifiedTrianglePath(vector<vector<int>> triangle) {
 
         vector<int> secondFromBottomRow = smallerTriangle[smallerTriangle.size() - 1];
 
-        for (int i = 0; i < secondFromBottomRow.size(); ++i) {
+        for (unsigned int i = 0; i < secondFromBottomRow.size(); ++i) {
             smallerTriangle[smallerTriangle.size() - 1][i] = secondFromBottomRow[i] + max(bottomRow[i], bottomRow[i + 1]);
         }
 
         return maxTotalForVerifiedTrianglePath(smallerTriangle);
     }
+}
+
+vector<int> Calculator::factorial(int number) {
+    vector<int> numberAsVector = Transformer::asVector(number);
+
+    for (int i = number - 1; i > 0; --i) {
+        for (unsigned int j = 0; j < numberAsVector.size(); ++j) {
+
+            numberAsVector[j] = numberAsVector[j] * i;
+
+            unsigned int k = j;
+            while (numberAsVector[k] >= 10) {
+                int tens = numberAsVector[k] / 10;
+
+                numberAsVector[k] = numberAsVector[k] % 10;
+                if (k == 0) {
+                    numberAsVector.insert(numberAsVector.begin(), tens);
+                    ++j;
+                    ++k;
+                } else {
+                    numberAsVector[k - 1] = numberAsVector[k - 1] + tens;
+                }
+
+                k--;
+            }
+        }
+    }
+
+    return numberAsVector;
 }
 
 

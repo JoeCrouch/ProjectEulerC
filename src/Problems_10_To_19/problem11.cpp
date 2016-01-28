@@ -63,8 +63,8 @@ int calculateLargestMultipleInMatrix(vector<vector<int>> matrix, int numberOfMul
     for (unsigned int i = 0; i < matrix.size(); ++i) {
         for(unsigned int j = 0; j < matrix[i].size(); ++j) {
 
-            int lastMultipleYPosition = i + numberOfMultiples * yDirection;
-            int lastMultipleXPosition = j + numberOfMultiples * xDirection;
+            unsigned int lastMultipleYPosition = i + numberOfMultiples * yDirection;
+            unsigned int lastMultipleXPosition = j + numberOfMultiples * xDirection;
 
             if (lastMultipleYPosition < 0 || lastMultipleYPosition > matrix.size() || lastMultipleXPosition < 0 || lastMultipleXPosition > matrix[i].size()) {
                 continue;
