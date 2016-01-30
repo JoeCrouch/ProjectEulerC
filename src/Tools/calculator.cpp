@@ -56,6 +56,16 @@ int Calculator::sumFibonacciMultiplesOf(vector<int> factors, int upTo) {
     return sum;
 }
 
+long Calculator::sum(vector<long> numbers) {
+    long sum = 0;
+
+    for (vector<long>::iterator it = numbers.begin(); it != numbers.end(); ++it) {
+        sum += *it;
+    }
+
+    return sum;
+}
+
 vector<int> Calculator::sumOfVectors(vector<int> vector1, vector<int> vector2) {
     vector<int> sumOfVectors;
 
