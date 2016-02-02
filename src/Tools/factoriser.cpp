@@ -38,7 +38,7 @@ vector<long> Factoriser::divisorsFor(long number) {
     
     
     long i;
-    for (i = 1; i * i <= number; ++i) {
+    for (i = 1; i * i < number; ++i) {
         if (number % i == 0) {
             numberOfDivisors.push_back(i);
             numberOfDivisors.push_back(number / i);
@@ -46,7 +46,7 @@ vector<long> Factoriser::divisorsFor(long number) {
     }
     
     if (i * i == number) {
-        numberOfDivisors.pop_back();
+        numberOfDivisors.push_back(i);
     }
     
     return numberOfDivisors;

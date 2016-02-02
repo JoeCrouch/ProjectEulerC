@@ -24,8 +24,8 @@ void Problem21::run() const {
             continue;
         }
 
-        long sumOfProperDivisors = sumProperDivisors(i);
-        long sumOfPairsProperDivisors = sumProperDivisors(sumOfProperDivisors);
+        long sumOfProperDivisors = Calculator::sumProperDivisors(i);
+        long sumOfPairsProperDivisors = Calculator::sumProperDivisors(sumOfProperDivisors);
 
         if (sumOfPairsProperDivisors == i && i != sumOfProperDivisors) {
             sum += i;
@@ -33,14 +33,6 @@ void Problem21::run() const {
     }
 
     cout << "The Sum Of Amicable Numbers Below " << max + 1 << " is: " << sum << endl << endl;
-}
-
-long sumProperDivisors(long n) {
-    vector<long> divisors = Factoriser::divisorsFor(n);
-
-    long sumOfDivisors = Calculator::sum(divisors);
-
-    return sumOfDivisors - n;
 }
 
 

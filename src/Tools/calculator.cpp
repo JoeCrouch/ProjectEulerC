@@ -56,6 +56,14 @@ int Calculator::sumFibonacciMultiplesOf(vector<int> factors, int upTo) {
     return sum;
 }
 
+long Calculator::sumProperDivisors(long n) {
+    vector<long> divisors = Factoriser::divisorsFor(n);
+    
+    long sumOfDivisors = Calculator::sum(divisors);
+    
+    return sumOfDivisors - n;
+}
+
 long Calculator::sum(vector<long> numbers) {
     long sum = 0;
 
