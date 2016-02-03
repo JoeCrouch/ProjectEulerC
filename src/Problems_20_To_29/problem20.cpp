@@ -12,7 +12,7 @@ using std::vector;
 const Problem20 Problem20::INSTANCE = Problem20();
 
 void Problem20::run() const {
-    vector<int> factorial = Calculator::factorial(100);
+    vector<int> factorial = Calculator::factorialAsVector(100);
 
     int sum = 0;
     for (vector<int>::iterator it = factorial.begin(); it != factorial.end(); ++it) {

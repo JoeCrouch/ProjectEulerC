@@ -22,7 +22,8 @@ public:
     static int conc(int a, int b);
     static long lowestCommonDenominator(vector<int> numbers);
     static int maxTotalForTrianglePath(vector<vector<int>> triangle);
-    static vector<int> factorial(int number);
+    static long factorial(long number);
+    static vector<int> factorialAsVector(int number);
 
 private :
     Calculator() {};
