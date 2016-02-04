@@ -23,6 +23,7 @@
 #include "problem23.h"
 #include "problem24.h"
 #include "problem25.h"
+#include "problem26.h"
 #include "problem60.h"
 #include "problem67.h"
 
@@ -102,6 +103,7 @@ map<int, const Problem*> availableProblems() {
         problems[23] = &(Problem23::INSTANCE);
         problems[24] = &(Problem24::INSTANCE);
         problems[25] = &(Problem25::INSTANCE);
+        problems[26] = &(Problem26::INSTANCE);
         problems[60] = &(Problem60::INSTANCE);
         problems[67] = &(Problem67::INSTANCE);
     }
