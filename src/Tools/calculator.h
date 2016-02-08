@@ -16,6 +16,7 @@ public:
     static vector<int> sumOfVectors(vector<int> vector1, vector<int> vector2);
     static long sumNumbersFromTo(int from, int to);
     static long sumSquaresFromTo(int from, int to);
+    static int product(vector<int> numbers);
     static bool isPalindromic(int n);
     static int powerOf(int number, int power);
     static vector<int> powerOfAsVector(int number, int power);

@@ -151,6 +151,16 @@ long Calculator::sumSquaresFromTo(int from, int to) {
 
 }
 
+int Calculator::product(vector<int> numbers) {
+    int product = 1;
+    
+    for (vector<int>::iterator it = numbers.begin(); it != numbers.end(); ++it) {
+        product *= *it;
+    }
+    
+    return product;
+}
+
 int Calculator::powerOf(int number, int power) {
     int result = 1;
 
