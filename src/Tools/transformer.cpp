@@ -11,15 +11,9 @@ string tensAsWord(int tens);
 vector<int> Transformer::asVector(long n) {
     vector<int> nAsVector;
 
-    int individualDigit = n % 10;
-
-    nAsVector.push_back(individualDigit);
-
-    if (n != individualDigit) {
-        long nWithoutLastDigit = (n - individualDigit) / 10;
-        vector<int> nWithoutLastDigitAsVector = asVector(nWithoutLastDigit);
-
-        nAsVector.insert(nAsVector.begin(), nWithoutLastDigitAsVector.begin(), nWithoutLastDigitAsVector.end());
+    while (n > 0) {
+        nAsVector.insert(nAsVector.begin(), n % 10);
+        n /= 10;
     }
 
     return nAsVector;

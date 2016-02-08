@@ -276,7 +276,7 @@ int maxTotalForVerifiedTrianglePath(vector<vector<int>> triangle) {
 }
 
 long Calculator::factorial(long number) {
-    return (number == 0 || number == 1) ? number : factorial(number - 1) * number;
+    return (number == 0 || number == 1) ? 1 : factorial(number - 1) * number;
 }
 
 vector<int> Calculator::factorialAsVector(int number) {

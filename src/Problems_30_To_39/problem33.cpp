@@ -10,8 +10,6 @@ using std::cout;
 using std::endl;
 using std::vector;
 
-bool correctCancelling(int firstDigit, int secondDigit, Fraction fraction);
-
 const Problem33 Problem33::INSTANCE = Problem33();
 
 void Problem33::run() const {
@@ -53,14 +51,6 @@ void Problem33::run() const {
     Fraction product = Fraction(Calculator::product(numerators), Calculator::product(denominators));
     
     cout << "Lowest Common Multiple of Denominators is: " << product.getDenominator() << endl << endl;
-}
-
-bool correctCancelling(int firstDigit, int secondDigit, Fraction fraction) {
-    if (firstDigit != secondDigit) {
-        return false;
-    } else {
-        return fraction == Fraction(firstDigit, secondDigit);
-    }
 }
 
 

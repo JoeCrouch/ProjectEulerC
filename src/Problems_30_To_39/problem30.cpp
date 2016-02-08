@@ -21,7 +21,7 @@ void Problem30::run() const {
         fifthPowersOfDigits.push_back(Calculator::powerOf(i, 5));
     }
     
-    for (int i = 1; i <= upperBound; ++i) {
+    for (int i = 2; i <= upperBound; ++i) {
         vector<int> asVector = Transformer::asVector(i);
         
         int sumOfDigitsToFifthPower = 0;
