@@ -191,13 +191,17 @@ vector<int> Calculator::powerOfAsVector (int number, int power) {
 }
 
 // Concatenates two numbers e.g. conc(11,27)=1127
-int Calculator::conc(int a, int b) {
-    int c = b;
+long Calculator::conc(long a, long b) {
+    long c = b;
     while (c > 0) {
         a *= 10;
         c /= 10;
     }
     return a + b;
+}
+
+long Calculator::conc(long a, long b, long c) {
+    return conc(conc(a, b), c);
 }
 
 long Calculator::lowestCommonDenominator(vector<int> numbers) {

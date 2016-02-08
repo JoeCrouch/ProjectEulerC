@@ -8,7 +8,7 @@ using std::stringstream;
 
 string tensAsWord(int tens);
 
-vector<int> Transformer::asVector(int n) {
+vector<int> Transformer::asVector(long n) {
     vector<int> nAsVector;
 
     int individualDigit = n % 10;
@@ -16,7 +16,7 @@ vector<int> Transformer::asVector(int n) {
     nAsVector.push_back(individualDigit);
 
     if (n != individualDigit) {
-        int nWithoutLastDigit = (n - individualDigit) / 10;
+        long nWithoutLastDigit = (n - individualDigit) / 10;
         vector<int> nWithoutLastDigitAsVector = asVector(nWithoutLastDigit);
 
         nAsVector.insert(nAsVector.begin(), nWithoutLastDigitAsVector.begin(), nWithoutLastDigitAsVector.end());

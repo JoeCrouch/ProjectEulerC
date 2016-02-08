@@ -11,7 +11,7 @@ using std::string;
 
 class Transformer {
 public:
-    static vector<int> asVector(int n);
+    static vector<int> asVector(long n);
     static vector<int> asVector(string n);
     static vector<int> asVector(string n, char delimeter);
     static string numberAsWord(int number);

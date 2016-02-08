@@ -19,7 +19,8 @@ public:
     static bool isPalindromic(int n);
     static int powerOf(int number, int power);
     static vector<int> powerOfAsVector(int number, int power);
-    static int conc(int a, int b);
+    static long conc(long a, long b);
+    static long conc(long a, long b, long c);
     static long lowestCommonDenominator(vector<int> numbers);
     static int maxTotalForTrianglePath(vector<vector<int>> triangle);
     static long factorial(long number);
