@@ -3,6 +3,7 @@
 #define ProjectEulerCXCode_calculator_h
 
 #include <vector>
+
 using std::vector;
 
 class Calculator {
@@ -18,6 +19,7 @@ public:
     static long sumSquaresFromTo(int from, int to);
     static int product(vector<int> numbers);
     static bool isPalindromic(int n);
+    static bool isPalindromic(vector<int> vector);
     static int powerOf(int number, int power);
     static vector<int> powerOfAsVector(int number, int power);
     static long conc(long a, long b);
@@ -26,6 +28,7 @@ public:
     static int maxTotalForTrianglePath(vector<vector<int>> triangle);
     static long factorial(long number);
     static vector<int> factorialAsVector(int number);
+    static int lengthOf(int number);
 
 private :
     Calculator() {};

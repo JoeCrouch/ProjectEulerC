@@ -11,7 +11,6 @@ using std::map;
 using std::max_element;
 using std::max;
 
-bool isPalindromic(vector<int> vector);
 void verifyIsTriangle(vector<vector<int>> triangle);
 int maxTotalForVerifiedTrianglePath(vector<vector<int>> verifiedTriangle);
 
@@ -117,10 +116,10 @@ vector<int> Calculator::sumOfVectors(vector<int> vector1, vector<int> vector2) {
 bool Calculator::isPalindromic(int n) {
     vector<int> nAsVector = Transformer::asVector(n);
 
-    return ::isPalindromic(nAsVector);
+    return isPalindromic(nAsVector);
 }
 
-bool isPalindromic(vector<int> vector) {
+bool Calculator::isPalindromic(vector<int> vector) {
     for (unsigned int i = 0; i < vector.size() / 2; ++i) {
         if (vector[i] != vector[vector.size() - i - 1]) {
             return false;
@@ -306,6 +305,16 @@ vector<int> Calculator::factorialAsVector(int number) {
     }
 
     return numberAsVector;
+}
+
+int Calculator::lengthOf(int number) {
+    int length = 0;
+    while (number != 0) {
+        length++;
+        number /= 10;
+    }
+    
+    return length;
 }
 
 

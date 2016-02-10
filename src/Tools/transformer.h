@@ -15,6 +15,7 @@ public:
     static vector<int> asVector(string n);
     static vector<int> asVector(string n, char delimeter);
     static string numberAsWord(int number);
+    static vector<int> inBinary(int n);
     
 private:
     Transformer() {};

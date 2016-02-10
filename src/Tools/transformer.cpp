@@ -128,3 +128,21 @@ string tensAsWord(int tens) {
             return "Error: number must be single positive digit greater than 1";
     }
 }
+
+
+vector<int> Transformer::inBinary(int n) {
+    vector<int> binary;
+    
+    while(n > 0) {
+        if (n & 1)
+            binary.insert(binary.begin(), 1);
+        else
+            binary.insert(binary.begin(), 0);
+        n >>= 1;
+    }
+    
+    return binary;
+}
+
+
+

@@ -16,7 +16,6 @@ using std::sort;
 
 vector<int> circularPrimesFor(int number);
 int nextCircularNumber(int number, int lengthOfNumber);
-int lengthOf(int number);
 
 vector<int> powersOfTen = {1};
 vector<int> primes = PrimeCalculator::buildVectorOfPrimesBelow(1000000);
@@ -46,7 +45,7 @@ void Problem35::run() const {
 
 vector<int> circularPrimesFor(int number) {
     vector<int> circularNumbers = {number};
-    int length = lengthOf(number);
+    int length = Calculator::lengthOf(number);
     int circularNumber = nextCircularNumber(number, length);
     
     while (circularNumber != number) {
@@ -70,16 +69,6 @@ int nextCircularNumber(int number, int length) {
     nextCircularNumber += digits * powersOfTen[length - 1];
     
     return nextCircularNumber;
-}
-
-int lengthOf(int number) {
-    int length = 0;
-    while (number != 0) {
-        length++;
-        number /= 10;
-    }
-    
-    return length;
 }
 
 
