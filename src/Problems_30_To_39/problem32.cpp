@@ -4,6 +4,7 @@
 #include "calculator.h"
 #include "factoriser.h"
 #include "transformer.h"
+#include "numberCharacteristic.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -12,8 +13,6 @@ using std::cout;
 using std::endl;
 using std::vector;
 using std::find;
-
-bool isPandigital(long number);
 
 const Problem32 Problem32::INSTANCE = Problem32();
 
@@ -30,7 +29,7 @@ void Problem32::run() const {
             int mult = i * j;
             
             if (find(products.begin(), products.end(), mult) == products.end() &&
-                isPandigital(Calculator::conc(i, j, mult))) {
+                NumberCharacteristic::is1To9Pandigital(Calculator::conc(i, j, mult))) {
                 products.push_back(mult);
                 sum += mult;
             }
@@ -39,21 +38,5 @@ void Problem32::run() const {
     
     cout << "Sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital is : "
     << sum << endl << endl;
-}
-
-bool isPandigital(long number) {
-    vector<int> asVector = Transformer::asVector(number);
-    
-    if (asVector.size() != 9) {
-        return false;
-    }
-    
-    for (int i = 1; i < 10; ++i) {
-        if (find(asVector.begin(), asVector.end(), i) == asVector.end()) {
-            return false;
-        }
-    }
-    
-    return true;
 }
 

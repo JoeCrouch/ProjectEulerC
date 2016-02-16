@@ -1,7 +1,7 @@
 //http://projecteuler.net/problem=4
 
 #include "problem4.h"
-#include "calculator.h"
+#include "numberCharacteristic.h"
 #include <iostream>
 #include <vector>
 
@@ -21,7 +21,7 @@ void Problem4::run() const {
     for (int i = 999; i >= 100; i--) {
         for(int j = i; j >= threeDigit2; j--) {
             int product = i * j;
-            if (product > largestPalindromicProduct && Calculator::isPalindromic(product)) {
+            if (product > largestPalindromicProduct && NumberCharacteristic::isPalindromic(product)) {
                 largestPalindromicProduct = product;
                 threeDigit1 = i;
                 threeDigit2 = j;

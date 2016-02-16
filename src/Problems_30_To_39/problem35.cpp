@@ -3,6 +3,7 @@
 #include "problem35.h"
 #include "primeCalculator.h"
 #include "calculator.h"
+#include "numberCharacteristic.h"
 #include "transformer.h"
 #include <iostream>
 #include <vector>
@@ -45,7 +46,7 @@ void Problem35::run() const {
 
 vector<int> circularPrimesFor(int number) {
     vector<int> circularNumbers = {number};
-    int length = Calculator::lengthOf(number);
+    int length = NumberCharacteristic::lengthOf(number);
     int circularNumber = nextCircularNumber(number, length);
     
     while (circularNumber != number) {

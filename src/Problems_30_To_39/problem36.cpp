@@ -1,7 +1,7 @@
 //http://projecteuler.net/problem=36
 
 #include "problem36.h"
-#include "calculator.h"
+#include "numberCharacteristic.h"
 #include "transformer.h"
 #include <iostream>
 #include <vector>
@@ -22,7 +22,7 @@ void Problem36::run() const {
     int i = 1;
     int palidromicNumber = palindromicNumberWithEvenNumberOfDigits(i);
     while (palidromicNumber < upperLimit) {
-        if (Calculator::isPalindromic(Transformer::inBinary(palidromicNumber))) {
+        if (NumberCharacteristic::isPalindromic(Transformer::inBinary(palidromicNumber))) {
             sum += palidromicNumber;
         }
         i++;
@@ -32,7 +32,7 @@ void Problem36::run() const {
     i = 1;
     palidromicNumber = palindromicNumberWithOddNumberOfDigits(i);
     while (palidromicNumber < upperLimit) {
-        if (Calculator::isPalindromic(Transformer::inBinary(palidromicNumber))) {
+        if (NumberCharacteristic::isPalindromic(Transformer::inBinary(palidromicNumber))) {
             sum += palidromicNumber;
         }
         i++;

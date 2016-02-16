@@ -2,7 +2,7 @@
 
 #include "problem67.h"
 #include "transformer.h"
-#include "calculator.h"
+#include "trianglePathCalculator.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -24,7 +24,7 @@ void Problem67::run() const {
 
     vector<vector<int>> triangle = readTriangleFile();
 
-    int maxTotal = Calculator::maxTotalForTrianglePath(triangle);
+    int maxTotal = TrianglePathCalculator::maxTotalForTrianglePath(triangle);
     cout << "Path With Greatest Sum From Top To Bottom Is: " << maxTotal << endl << endl;
 }
 
