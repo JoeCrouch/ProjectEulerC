@@ -19,6 +19,19 @@ vector<int> Transformer::asVector(long n) {
     return nAsVector;
 }
 
+int Transformer::asNumber(vector<int> numberAsVector) {
+    int number = 0;
+    int mult = 1;
+    
+    while (numberAsVector.size() > 0) {
+        number += numberAsVector[numberAsVector.size() - 1] * mult;
+        mult *= 10;
+        numberAsVector.pop_back();
+    }
+    
+    return number;
+}
+
 vector<int> Transformer::asVector(string n) {
     vector<int> stringAsIntVector;
 

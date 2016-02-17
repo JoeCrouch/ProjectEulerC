@@ -10,9 +10,9 @@ using std::cout;
 using std::endl;
 using std::vector;
 
-const Problem40 Problem40::INSTANCE = Problem40();
-
 int consecutiveDigitNumber(int n);
+
+const Problem40 Problem40::INSTANCE = Problem40();
 
 void Problem40::run() const {
     

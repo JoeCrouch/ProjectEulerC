@@ -25,6 +25,7 @@ public:
     static long lowestCommonDenominator(vector<int> numbers);
     static long factorial(long number);
     static vector<int> factorialAsVector(int number);
+    static vector<int> getLexPermutation(vector<int> numbers, long permutationNumber);
 
 private :
     Calculator() {};

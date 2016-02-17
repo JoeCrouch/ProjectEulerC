@@ -10,6 +10,7 @@
 using std::map;
 using std::max_element;
 using std::max;
+using std::invalid_argument;
 
 void verifyIsTriangle(vector<vector<int>> triangle);
 int maxTotalForVerifiedTrianglePath(vector<vector<int>> verifiedTriangle);
@@ -255,6 +256,34 @@ vector<int> Calculator::factorialAsVector(int number) {
     }
 
     return numberAsVector;
+}
+
+vector<int> Calculator::getLexPermutation(vector<int> numbers, long permutationNumber) {
+    long size = numbers.size();
+    if (permutationNumber > Calculator::factorial(size)) {
+        throw invalid_argument("Cannot Get Permutation Number Greater Than Total Number Of Permutations.");
+    }
+    vector<int> permutation;
+    vector<int> remainingNumbers = numbers;
+    
+    sort(numbers.begin(), numbers.end());
+    
+    for (int i = 1; i < size; ++i) {
+        long factorial = Calculator::factorial(size - i);
+        
+        int count = 0;
+        while (permutationNumber > factorial) {
+            permutationNumber -= factorial;
+            count++;
+        }
+        
+        permutation.push_back(remainingNumbers[count]);
+        remainingNumbers.erase(remainingNumbers.begin() + count);
+    }
+    
+    permutation.push_back(remainingNumbers[0]);
+    
+    return permutation;
 }
 
 
