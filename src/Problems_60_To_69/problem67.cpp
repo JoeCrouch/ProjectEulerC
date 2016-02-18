@@ -3,6 +3,7 @@
 #include "problem67.h"
 #include "transformer.h"
 #include "trianglePathCalculator.h"
+#include "fileReader.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -16,37 +17,27 @@ using std::string;
 using std::ifstream;
 using std::getline;
 
-vector<vector<int>> readTriangleFile();
+vector<vector<int>> readTriangle(ifstream &triangleFile);
 
 const Problem67 Problem67::INSTANCE = Problem67();
 
 void Problem67::run() const {
 
-    vector<vector<int>> triangle = readTriangleFile();
+    vector<vector<int>> triangle = FileReader::readFile("triangle.txt", readTriangle);
 
     int maxTotal = TrianglePathCalculator::maxTotalForTrianglePath(triangle);
     cout << "Path With Greatest Sum From Top To Bottom Is: " << maxTotal << endl << endl;
 }
 
 
-vector<vector<int>> readTriangleFile() {
+vector<vector<int>> readTriangle(ifstream &triangleFile) {
 
     vector<vector<int>> triangle;
-
-    ifstream triangleFile;
-
-    triangleFile.open("triangle.txt");
-
-    if (!triangleFile.good()) {
-        throw std::runtime_error("could not open triangle.txt");
-    }
 
     string row;
     while (getline(triangleFile, row, '\n')) {
         triangle.push_back(Transformer::asVector(row, ' '));
     }
-
-    triangleFile.close();
 
     return triangle;
 }

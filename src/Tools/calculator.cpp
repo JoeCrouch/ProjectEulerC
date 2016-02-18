@@ -286,5 +286,19 @@ vector<int> Calculator::getLexPermutation(vector<int> numbers, long permutationN
     return permutation;
 }
 
+vector<long> Calculator::getTriangleNumbersLessThanOrEqualTo(long maxWordScore) {
+    vector<long> triangleNumbers;
+    
+    int diff = 2;
+    long triangleNumber = 1;
+    while (triangleNumber <= maxWordScore) {
+        triangleNumbers.push_back(triangleNumber);
+        triangleNumber += diff;
+        diff++;
+    }
+    
+    return triangleNumbers;
+}
+
 
 
