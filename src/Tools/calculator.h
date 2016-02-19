@@ -26,6 +26,7 @@ public:
     static long factorial(long number);
     static vector<int> factorialAsVector(int number);
     static vector<int> getLexPermutation(vector<int> numbers, long permutationNumber);
+    static vector<int> getNextLexPermutation(vector<int> permutation);
     static vector<long> getTriangleNumbersLessThanOrEqualTo(long maxWordScore);
 
 private :

@@ -18,8 +18,8 @@ using std::sort;
 vector<int> circularPrimesFor(int number);
 int nextCircularNumber(int number, int lengthOfNumber);
 
-vector<int> powersOfTen = {1};
-vector<int> primes = PrimeCalculator::buildVectorOfPrimesBelow(1000000);
+static vector<int> powersOfTen = {1};
+static vector<int> primes = PrimeCalculator::buildVectorOfPrimesBelow(1000000);
 
 const Problem35 Problem35::INSTANCE = Problem35();
 

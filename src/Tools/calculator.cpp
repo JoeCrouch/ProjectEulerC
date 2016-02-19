@@ -12,8 +12,7 @@ using std::max_element;
 using std::max;
 using std::invalid_argument;
 
-void verifyIsTriangle(vector<vector<int>> triangle);
-int maxTotalForVerifiedTrianglePath(vector<vector<int>> verifiedTriangle);
+static void swap(vector<int> *numbers, long position1, long position2);
 
 /*
  * Calculates the sum of all integers less than @upTo that have at least one factor in @factors.
@@ -284,6 +283,39 @@ vector<int> Calculator::getLexPermutation(vector<int> numbers, long permutationN
     permutation.push_back(remainingNumbers[0]);
     
     return permutation;
+}
+
+vector<int> Calculator::getNextLexPermutation(vector<int> permutation) {
+    long size = permutation.size();
+    
+    long i = size - 2;
+    while (permutation[i] >= permutation[i + 1]) {
+        i--;
+    }
+    
+    long j = size - 1;
+    while (permutation[j] <= permutation[i]) {
+        j--;
+    }
+    
+    swap(&permutation, i, j);
+    
+    i++;
+    j = size - 1;
+    while (i < j) {
+        swap(&permutation, i, j);
+        i++;
+        j--;
+    }
+    
+    return permutation;
+}
+
+void swap(vector<int> *numbers, long position1, long position2) {
+    int holder = (*numbers)[position1];
+    
+    (*numbers)[position1] = (*numbers)[position2];
+    (*numbers)[position2] = holder;
 }
 
 vector<long> Calculator::getTriangleNumbersLessThanOrEqualTo(long maxWordScore) {
